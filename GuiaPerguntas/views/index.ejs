@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gui Perguntas</title>
+</head>
+
+<body>
+    <h1>Guia Perguntas</h1>
+    <hr>
+    <h3>Fernando</h3>
+
+    <p>Nome: <%= nome %></p>
+    <p>Linguagem: <%= lang %></p>
+    <p>Empresa: <%= empresa %> </p>
+
+
+    <%if(msg){%>
+    <h3>Isso é uma mensagem de erro</h3>
+    <% }else{%>
+    <h3>Nenhum erro</h3>
+    <% } %>
+
+
+    <% produtos.forEach(function(produto){ %>
+        <hr>
+       <h4><%=produto.nome  %></h4>
+        <h5><%=produto.preco  %></h5>  
+    <% }) %>  
+</body>
+
+</html>
