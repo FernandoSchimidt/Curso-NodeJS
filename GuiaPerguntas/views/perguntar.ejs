@@ -1,5 +1,4 @@
 <%- include ('partials/header.ejs')%>
-
 <body>
     <%- include ('partials/navbar.ejs')%>
     <div class="container">
@@ -8,13 +7,12 @@
                 <h3>Realizar pergunta</h3>
             </div>
             <div class="card-body">
-                <form action="">
-
+                <form action="/salvarpergunta" method="POST">
                     <label for="">Titulo</label>
-                    <input type="text" placeholder="Titulo" class="form-control">
+                    <input name="titulo" type="text" placeholder="Titulo" class="form-control">
                     <br>
                     <label for="">Descrição</label>
-                    <textarea placeholder="Descreva sua pergunta aqui" class="form-control"></textarea>
+                    <textarea name="descricao" placeholder="Descreva sua pergunta aqui" class="form-control"></textarea>
                     <br>
                     <button class="btn btn-primary">Perguntar</button>
                 </form>
@@ -22,5 +20,4 @@
         </div>
     </div>
 </body>
-
 <%- include ('partials/footer.ejs') %>
