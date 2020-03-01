@@ -3,7 +3,7 @@ const app = express(); //criando  uma instancia do expreass
 const bodyParser = require('body-parser');
 const connection = require('./database/database');
 const Pergunta = require('./database/Pergunta');
-
+const Resposta = require('./database/Resposta');
 //Database
 connection
     .authenticate()
@@ -62,14 +62,38 @@ app.get('/pergunta/:id', (req, res) => {
     Pergunta.findOne({
         where: {
             id: id //pega no banco pelo id 
-             //busca um dado com uma condição
+            //busca um dado com uma condição
         }
-    }).then(pergunta=>{
-        if(Pergunta != undefined){//pergunta encontrada no banco
-            res.render('pergunta');
-        }else{//não encontrada
+    }).then(pergunta => {
+        if (pergunta != undefined) { //pergunta encontrada no banco
+            //todas as resposta destapergunta
+            Resposta.findAll({
+                where: {
+                    perguntaId: pergunta.id
+                },
+                order: [
+                    ['id', 'DESC']
+                ]
+            }).then(respostas => {
+                res.render('pergunta', {
+                    pergunta: pergunta,
+                    respostas: respostas
+                });
+            });
+        } else { //não encontrada
             res.redirect('/');
         }
+    });
+});
+//recebe dado do formulario
+app.post('/responder', (req, res) => {
+    var corpo = req.body.corpo; //recebe a resposta que vem pelo text area
+    var perguntaId = req.body.pergunta; //pega o id da pergunta
+    Resposta.create({
+        corpo: corpo,
+        perguntaId: perguntaId
+    }).then(() => {
+        res.redirect('/pergunta/' + perguntaId);
     });
 });
 app.listen(8080, () => {
