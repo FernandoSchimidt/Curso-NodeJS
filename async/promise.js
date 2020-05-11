@@ -35,36 +35,36 @@ function enviarEmail(corpo, para) {
     })
 }
 
-function pegarUsuarios() {
-    return new Promise((res, rej) => {
+// function pegarUsuarios() {
+//     return new Promise((res, rej) => {
 
-        setTimeout(() => {
-            res([{
-                    name: 'Fernando',
-                    lang: 'Js'
-                },
-                {
-                    name: 'Schimidt',
-                    lang: 'Angular'
-                },
-                {
-                    name: 'Beatriz',
-                    lang: 'Nada'
-                },
+//         setTimeout(() => {
+//             res([{
+//                     name: 'Fernando',
+//                     lang: 'Js'
+//                 },
+//                 {
+//                     name: 'Schimidt',
+//                     lang: 'Angular'
+//                 },
+//                 {
+//                     name: 'Beatriz',
+//                     lang: 'Nada'
+//                 },
 
-            ])
-        }, 3000)
+//             ])
+//         }, 3000)
 
-    });
-}
+//     });
+// }
 
-async function principal() {
-    var usuarios = await pegarUsuarios();
-    console.log(usuarios);
-    console.log('Ola');
-}
+// async function principal() {
+//     var usuarios = await pegarUsuarios();
+//     console.log(usuarios);
+//     console.log('Ola');
+// }
 
-principal();
+// principal();
 
 // enviarEmail('O palmeiras nao tem mundial', 'palmeiras')
 //     .then(({
@@ -94,3 +94,12 @@ principal();
 //         })
 //     })
 // })
+
+async function principal() {
+    var id = await pegarId();
+    var email = await buscaEmaiBanco(id);
+    enviarEmail('ola, como vai voce', email).then(() => {
+        console.log('Email enviado')
+    }).catch((err) => console.log(err));
+};
+principal();
